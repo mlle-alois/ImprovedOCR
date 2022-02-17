@@ -1,4 +1,5 @@
 export class NumberStrings {
+    public static NUMBER_ZERO = " _ | ||_|   "
     public static NUMBER_ONE = "     |  |   "
     public static NUMBER_TWO = " _  _||_    "
     public static NUMBER_THREE = " _  _| _|   "

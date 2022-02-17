@@ -9,32 +9,40 @@ const END_OF_LINE: string = '\r\n'
 
 export class Parser {
 
-    private singleEntry: string[] = [];
+    private entries: string[] = [];
 
-    public parse(stringToParse: string): string {
+    public parse(stringToParse: string): string[] {
         if (stringToParse.trim() == EMPTY_STRING) {
-            return EMPTY_STRING
+            return [EMPTY_STRING]
         }
 
-        this.singleEntry = stringToParse.split(END_OF_LINE)
+        this.entries = stringToParse.split(END_OF_LINE)
 
-        return this.generateCode()
+        return this.generateCodes()
     }
 
-    private generateCode(): string {
+    private generateCodes(): string[] {
+        let codes = [];
+        for (let lineIndex = 0; lineIndex < this.entries.length - 1; lineIndex += NUMBER_HEIGHT) {
+            codes.push(this.generateCode(lineIndex))
+        }
+        return codes
+    }
+
+    private generateCode(startHeight: number): string {
         let code = EMPTY_STRING;
         for (let positionInEntryLine = 0; positionInEntryLine < ENTRY_WIDTH; positionInEntryLine += NUMBER_WIDTH) {
-            code += Parser.matchNumber(this.extractNumber(positionInEntryLine, positionInEntryLine + NUMBER_WIDTH))
+            code += Parser.matchNumber(this.extractNumber(positionInEntryLine, startHeight))
         }
         return code
     }
 
-    private extractNumber(start: number, end: number): string {
+    private extractNumber(startWidth: number, startHeight: number): string {
         let numberString = EMPTY_STRING;
 
-        for (let positionInEntryHeight = 0; positionInEntryHeight < NUMBER_HEIGHT; positionInEntryHeight += 1) {
-            for (let position = start; position < end; position += 1) {
-                numberString += this.singleEntry[positionInEntryHeight].charAt(position)
+        for (let lineIndex = startHeight; lineIndex < startHeight + NUMBER_HEIGHT; lineIndex += 1) {
+            for (let position = startWidth; position < startWidth + NUMBER_WIDTH; position += 1) {
+                numberString += this.entries[lineIndex].charAt(position)
             }
         }
         return numberString
@@ -42,6 +50,8 @@ export class Parser {
 
     private static matchNumber(numberString: string): string {
         switch (numberString) {
+            case NumberStrings.NUMBER_ZERO:
+                return "0"
             case NumberStrings.NUMBER_ONE:
                 return "1"
             case NumberStrings.NUMBER_TWO:

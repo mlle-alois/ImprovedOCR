@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {EntryFile} from "../src/entry-file";
-import {EMPTY_PATH, ONE_ENTRY_PATH} from "./paths";
+import {EMPTY_PATH, ONE_ENTRY_PATH} from "./paths-and-contents";
 
 const basicEntry: string =
     '    _  _     _  _  _  _  _\r\n' +
