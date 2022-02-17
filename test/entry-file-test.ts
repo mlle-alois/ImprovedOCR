@@ -3,7 +3,7 @@ import {EntryFile} from "../src/entry-file";
 import {EMPTY_PATH, ONE_ENTRY_PATH} from "./paths-and-contents";
 
 const basicEntry: string =
-    '    _  _     _  _  _  _  _\r\n' +
+    '    _  _     _  _  _  _  _ \r\n' +
     '  | _| _||_||_ |_   ||_||_|\r\n' +
     '  ||_  _|  | _||_|  ||_| _|\r\n' +
     '                           \r\n'

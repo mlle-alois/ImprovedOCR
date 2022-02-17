@@ -1,4 +1,4 @@
-import {Entry} from "./entry";
+import {Entry} from "./interfaces/entry";
 import * as fs from "fs";
 
 export class EntryFile implements Entry {

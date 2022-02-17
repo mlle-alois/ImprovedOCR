@@ -1,4 +1,5 @@
 import {NumberStrings} from "./number-strings";
+import {Parser} from "./interfaces/parser";
 
 const NUMBER_HEIGHT: number = 4
 const ENTRY_WIDTH: number = 27
@@ -7,7 +8,7 @@ const EMPTY_STRING: string = ''
 const UNKNOWN_SYMBOL: string = '?'
 const END_OF_LINE: string = '\r\n'
 
-export class Parser {
+export class ParserFile implements Parser {
 
     private entries: string[] = [];
 
@@ -32,7 +33,7 @@ export class Parser {
     private generateCode(startHeight: number): string {
         let code = EMPTY_STRING;
         for (let positionInEntryLine = 0; positionInEntryLine < ENTRY_WIDTH; positionInEntryLine += NUMBER_WIDTH) {
-            code += Parser.matchNumber(this.extractNumber(positionInEntryLine, startHeight))
+            code += ParserFile.matchNumber(this.extractNumber(positionInEntryLine, startHeight))
         }
         return code
     }
