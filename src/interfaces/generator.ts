@@ -1,3 +1,3 @@
 export interface Generator {
-    generate(codes: string[], filename: string): void
+    generate(input: string): void
 }

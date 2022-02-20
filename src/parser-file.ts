@@ -1,18 +1,26 @@
-import {NumberStrings} from "./number-strings";
+import {NumberStrings} from "./consts/number-strings";
 import {Parser} from "./interfaces/parser";
+import {Extractor} from "./interfaces/extractor";
 
 const NUMBER_HEIGHT: number = 4
 const ENTRY_WIDTH: number = 27
 const NUMBER_WIDTH: number = 3
 const EMPTY_STRING: string = ''
-const UNKNOWN_SYMBOL: string = '?'
+export const UNKNOWN_SYMBOL: string = '?'
 const END_OF_LINE: string = '\r\n'
 
 export class ParserFile implements Parser {
 
     private entries: string[] = [];
+    private fileExtractor: Extractor;
+    
+    constructor(fileExtractor: Extractor) {
+        this.fileExtractor = fileExtractor
+    }
 
-    public parse(stringToParse: string): string[] {
+    public parse(filepath: string): string[] {
+        let stringToParse = this.fileExtractor.getExtratedContent(filepath);
+        
         if (stringToParse.trim() == EMPTY_STRING) {
             return [EMPTY_STRING]
         }
@@ -30,26 +38,26 @@ export class ParserFile implements Parser {
         return codes
     }
 
-    private generateCode(startHeight: number): string {
+    private generateCode(startLine: number): string {
         let code = EMPTY_STRING;
-        for (let positionInEntryLine = 0; positionInEntryLine < ENTRY_WIDTH; positionInEntryLine += NUMBER_WIDTH) {
-            code += ParserFile.matchNumber(this.extractNumber(positionInEntryLine, startHeight))
+        for (let columnIndex = 0; columnIndex < ENTRY_WIDTH; columnIndex += NUMBER_WIDTH) {
+            code += ParserFile.matchFlattenNumber(this.extractFlattenNumber(columnIndex, startLine))
         }
         return code
     }
 
-    private extractNumber(startWidth: number, startHeight: number): string {
-        let numberString = EMPTY_STRING;
+    private extractFlattenNumber(startColumn: number, startLine: number): string {
+        let flattenNumber = EMPTY_STRING;
 
-        for (let lineIndex = startHeight; lineIndex < startHeight + NUMBER_HEIGHT; lineIndex += 1) {
-            for (let position = startWidth; position < startWidth + NUMBER_WIDTH; position += 1) {
-                numberString += this.entries[lineIndex].charAt(position)
+        for (let lineIndex = startLine; lineIndex < startLine + NUMBER_HEIGHT; lineIndex += 1) {
+            for (let columnIndex = startColumn; columnIndex < startColumn + NUMBER_WIDTH; columnIndex += 1) {
+                flattenNumber += this.entries[lineIndex].charAt(columnIndex)
             }
         }
-        return numberString
+        return flattenNumber
     }
 
-    private static matchNumber(numberString: string): string {
+    private static matchFlattenNumber(numberString: string): string {
         switch (numberString) {
             case NumberStrings.NUMBER_ZERO:
                 return "0"

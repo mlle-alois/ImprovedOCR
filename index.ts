@@ -1,4 +1,4 @@
-import {NumberStrings} from "./src/number-strings";
+import {NumberStrings} from "./src/consts/number-strings";
 
 for (let i = 0; i < 12; i += 3) {
     console.log(NumberStrings.NUMBER_ONE.substring(i, i + 3) +
