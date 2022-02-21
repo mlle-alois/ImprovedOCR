@@ -19,7 +19,7 @@ export class ParserFile implements Parser {
     }
 
     public parse(filepath: string): string[] {
-        let stringToParse = this.fileExtractor.getExtratedContent(filepath);
+        let stringToParse = this.fileExtractor.getExtractedContent(filepath);
         
         if (stringToParse.trim() == EMPTY_STRING) {
             return [EMPTY_STRING]

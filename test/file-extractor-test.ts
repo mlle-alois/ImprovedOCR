@@ -8,15 +8,23 @@ const singleEntry: string =
     '  ||_  _|  | _||_|  ||_| _|\r\n' +
     '                           \r\n'
 describe('File Extractor', () => {
+    const fileExtractor: FileExtractor = new FileExtractor();
     describe('Get Extractor', () => {
         it('Should get the content of not empty file', () => {
-            const fileExtractor: FileExtractor = new FileExtractor();
-            expect(fileExtractor.getExtratedContent(ONE_ENTRY_PATH)).to.equal(singleEntry);
+            expect(fileExtractor.getExtractedContent(ONE_ENTRY_PATH)).to.equal(singleEntry);
         });
 
         it('Should get the content of empty file', () => {
-            const fileExtractor: FileExtractor = new FileExtractor();
-            expect(fileExtractor.getExtratedContent(EMPTY_PATH)).to.equal("");
+            expect(fileExtractor.getExtractedContent(EMPTY_PATH)).to.equal("");
+        });
+    })
+    describe('Does data exist', () => {
+        it('Should return true for existing file', () => {
+            expect(fileExtractor.doesDataExist(ONE_ENTRY_PATH)).to.equal(true);
+        });
+
+        it('Should return false for not existing file', () => {
+            expect(fileExtractor.doesDataExist("fake path")).to.equal(false);
         });
     })
 });

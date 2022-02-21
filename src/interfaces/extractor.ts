@@ -1,3 +1,5 @@
 export interface Extractor {
-    getExtratedContent(input: string): string
+    getExtractedContent(input: string): string
+    
+    doesDataExist(input: string): boolean
 }

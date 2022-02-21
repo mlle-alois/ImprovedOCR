@@ -5,7 +5,7 @@ import {ERROR_SUFFIX, ILLEGAL_SUFFIX} from "./consts/suffixes";
 import {Parser} from "./interfaces/parser";
 import {PathFactory} from "./path-factory";
 
-export class EachFileGenerator implements Generator {
+export class SeparatedFileGenerator implements Generator {
 
     private readonly repository = "_generated-files-US4"
 
@@ -16,13 +16,13 @@ export class EachFileGenerator implements Generator {
     }
 
     public generate(filepath: string): void {
-        let filename = EachFileGenerator.extractFileName(filepath)
+        let filename = SeparatedFileGenerator.extractFileName(filepath)
 
         let path = PathFactory.generate(this.repository, filename)
 
         let codes = this.parser.parse(filepath)
 
-        EachFileGenerator.overwriteOldContent(path)
+        SeparatedFileGenerator.overwriteOldContent(path)
 
         this.appendCodesToFile(codes, path);
     }

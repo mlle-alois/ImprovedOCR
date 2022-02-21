@@ -49,15 +49,15 @@ describe('Grouped File Generator', () => {
         let extractedErroredContentAfterTreatment: string;
         let extractedUnknownContentAfterTreatment: string;
         beforeEach(() => {
-            extractedAuthorizedContent = fileExtractor.getExtratedContent(AUTHORIZED_PATH_RESULT);
-            extractedErroredContent = fileExtractor.getExtratedContent(ERRORED_PATH_RESULT);
-            extractedUnknownContent = fileExtractor.getExtratedContent(UNKNOWN_PATH_RESULT);
+            extractedAuthorizedContent = fileExtractor.getExtractedContent(AUTHORIZED_PATH_RESULT);
+            extractedErroredContent = fileExtractor.getExtractedContent(ERRORED_PATH_RESULT);
+            extractedUnknownContent = fileExtractor.getExtractedContent(UNKNOWN_PATH_RESULT);
         });
         
         function initAfterTreatment(): void {
-            extractedAuthorizedContentAfterTreatment = fileExtractor.getExtratedContent(AUTHORIZED_PATH_RESULT);
-            extractedErroredContentAfterTreatment = fileExtractor.getExtratedContent(ERRORED_PATH_RESULT);
-            extractedUnknownContentAfterTreatment = fileExtractor.getExtratedContent(UNKNOWN_PATH_RESULT);
+            extractedAuthorizedContentAfterTreatment = fileExtractor.getExtractedContent(AUTHORIZED_PATH_RESULT);
+            extractedErroredContentAfterTreatment = fileExtractor.getExtractedContent(ERRORED_PATH_RESULT);
+            extractedUnknownContentAfterTreatment = fileExtractor.getExtractedContent(UNKNOWN_PATH_RESULT);
         }
         
         it('Should write multiple codes on files', () => {
